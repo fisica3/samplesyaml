@@ -1,0 +1,67 @@
+# Pipeline de ejemplo que permite ver las relaciones entre stages
+# Para que funcione adecuadamente, deberas crear una variable, dentro de tu pipeline, llamada "firstVariable" y asignarle un 
+# valor de 'true' o 'false'
+# https://aka.ms/yaml
+
+trigger:
+- none
+#- master
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      vmImage: 'ubuntu-latest' #You can run on containers too 
+    continueOnError: true
+    steps:
+    - script: echo "hello to my first Build"
+      displayName: 'Msg First Build'
+- stage: dev_deploy
+  jobs:
+  - deployment: dev_deploy
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: 'dev-hello'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo "hello MS Ignite, dev world, value is $(firstVariable)!!!"
+            displayName: 'Msg Deploy Dev'
+
+- stage: qa_deploy
+  jobs:
+  - deployment: qa_deploy  #not a job... a deployment!
+    condition: eq(variables.firstVariable, true)
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: 'qa-hello'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo "hello, qa world !!!"
+            displayName: 'Msg Deploy QA'
+
+- stage: run_system_quality_tests
+  displayName: 'Run the system quality tests'
+  dependsOn: qa_deploy
+  jobs:
+  - job: run_non_functional_tests
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo Run system quality tests
+      displayName: 'Running the system quality tests'        
+
+- stage: run_performance_tests
+  displayName: 'Run the performance tests'
+  dependsOn: qa_deploy
+  jobs:
+  - job: run_stress_tests
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo Run performance tests
+      displayName: 'Running the performance tests'               
