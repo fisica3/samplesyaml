@@ -1,0 +1,21 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+stages:
+- stage: SwaDEV
+  displayName: SWA DEV
+
+  jobs:
+  - job: Prueba
+    displayName: Prueba
+    #environment: 'development'
+    steps:
+    - task: AzureStaticWebApp@0
+      inputs:
+        app_location: '/'
+        api_location: 'api'
+      #  routes_location: '/public'
+      env: 
+        azure_static_web_apps_api_token: $(deployment_token)
