@@ -19,3 +19,16 @@ stages:
       #  routes_location: '/public'
       env: 
         azure_static_web_apps_api_token: $(deployment_token)
+        
+- stage: qa_deploy
+  jobs:
+  - deployment: qa_deploy  #not a job... a deployment!
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: 'qa-hello'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo "hello, qa world !!!"
+            displayName: 'Msg Deploy QA'
