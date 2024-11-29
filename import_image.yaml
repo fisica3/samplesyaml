@@ -8,7 +8,7 @@ variables:
   sourceRegistry: '/subscriptions/89f21b48-2a5e-477c-ac88-c9cbb8401024/resourceGroups/rg_repasowebapp03/providers/Microsoft.ContainerRegistry/registries/repasowebappacr'
   sourceImage: 'bookapprepaso:1437'
   targetRegistry: 'fisica3'
-  targetImage: 'bookapprepaso_new:19'
+  targetImage: 'bookapprepaso_new:45'
 
 
 steps:
