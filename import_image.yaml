@@ -11,9 +11,9 @@ variables:
   targetImage: 'bookapprepaso:15'
 
 steps:
-- task: DockerInstaller@0
-  inputs:
-    dockerVersion: 'latest'
+- #task: DockerInstaller@0
+  #inputs:
+  #  dockerVersion: 'latest'
 
 - task: AzureCLI@2
   inputs:
