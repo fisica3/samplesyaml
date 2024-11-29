@@ -21,6 +21,7 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
+      az upgrade --yes
       az acr import --name fisica3.azurecr.io --source bookapprepaso:1502 --image bookapprepaso:15 --registry /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sourceResourceGroup/providers/Microsoft.ContainerRegistry/registries/sourceRegistry
     addSpnToEnvironment: true
     #az acr import --name MyRegistry --source docker.io/library/hello-world:latest --image targetrepository:targettag
