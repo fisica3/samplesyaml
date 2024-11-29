@@ -1,0 +1,25 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  sourceRegistry: 'repasowebappacr.azurecr.io'
+  sourceImage: 'bookapprepaso:1502'
+  targetRegistry: 'fisica3.azurecr.io'
+  targetImage: 'bookapprepaso:15'
+
+steps:
+- task: DockerInstaller@0
+  inputs:
+    dockerVersion: 'latest'
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'sc_acr_fisica3'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az acr import --name $targetRegistry --source $sourceRegistry/$sourceImage --image $targetImage
+    addSpnToEnvironment: true
