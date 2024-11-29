@@ -7,7 +7,7 @@ pool:
 variables:
   sourceRegistry: 'repasowebappacr.azurecr.io'
   sourceImage: 'bookapprepaso:1502'
-  targetRegistry: 'fisica3.azurecr.io'
+  targetRegistry: 'fisica3'
   targetImage: 'bookapprepaso:15'
 
 steps:
@@ -23,7 +23,7 @@ steps:
     inlineScript: |
       az upgrade --yes
       az login --identity
-      az acr import --name fisica3.azurecr.io --source bookapprepaso:1502 --image bookapprepaso:15 --registry /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sourceResourceGroup/providers/Microsoft.ContainerRegistry/registries/sourceRegistry
+      az acr import --name $targetRegistry --source bookapprepaso:1502 --image bookapprepaso:15 --registry /subscriptions/89f21b48-2a5e-477c-ac88-c9cbb8401024/resourceGroups/rg_repasowebapp03/providers/Microsoft.ContainerRegistry/registries/repasowebappacr
     #addSpnToEnvironment: true
     #az acr import --name MyRegistry --source docker.io/library/hello-world:latest --image targetrepository:targettag
 #az acr import --name MyRegistry --source sourcerepository:sourcetag --image targetrepository:targettag 
