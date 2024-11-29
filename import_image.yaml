@@ -17,7 +17,7 @@ steps:
 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'sc_arm_ErnestoContainers'
+    azureSubscription: 'sc_sp_ErnestoContainers'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
