@@ -5,10 +5,11 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  sourceRegistry: 'repasowebappacr.azurecr.io'
+  sourceRegistry: '/subscriptions/89f21b48-2a5e-477c-ac88-c9cbb8401024/resourceGroups/rg_repasowebapp03/providers/Microsoft.ContainerRegistry/registries/repasowebappacr'
   sourceImage: 'bookapprepaso:1437'
   targetRegistry: 'fisica3'
   targetImage: 'bookapprepaso_new:19'
+
 
 steps:
 - task: DockerInstaller@0
@@ -25,7 +26,7 @@ steps:
       az account set --subscription "Visual Studio Enterprise Subscription"
       az acr login -n $(targetRegistry) --expose-token
       az account show
-      az acr import --name $(targetRegistry) --source $(sourceImage) --image $(targetImage) --registry /subscriptions/89f21b48-2a5e-477c-ac88-c9cbb8401024/resourceGroups/rg_repasowebapp03/providers/Microsoft.ContainerRegistry/registries/repasowebappacr
+      az acr import --name $(targetRegistry) --source $(sourceImage) --image $(targetImage) --registry $(sourceRegistry)
     #addSpnToEnvironment: true
     #az acr import --name MyRegistry --source docker.io/library/hello-world:latest --image targetrepository:targettag
           # az login --identity
