@@ -17,7 +17,7 @@ steps:
 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'sc_acr_fisica3'
+    azureSubscription: 'sc_arm_ErnestoContainers'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
