@@ -23,7 +23,7 @@ steps:
     inlineScript: |
       az upgrade --yes
       az account set --subscription "Visual Studio Enterprise Subscription"
-      az acr login -n fisica3
+      az acr login -n fisica3 --expose-token
       az account show
       az acr import --name fisica3 --source bookapprepaso:1502 --image bookapprepaso:15 --registry /subscriptions/89f21b48-2a5e-477c-ac88-c9cbb8401024/resourceGroups/rg_repasowebapp03/providers/Microsoft.ContainerRegistry/registries/repasowebappacr
     #addSpnToEnvironment: true
