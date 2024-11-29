@@ -13,7 +13,7 @@ variables:
 steps:
 - task: DockerInstaller@0
   inputs:
-    dockerVersion: 'latest'
+    dockerVersion: '17.09.0-ce'
 
 - task: AzureCLI@2
   inputs:
