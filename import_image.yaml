@@ -11,7 +11,7 @@ variables:
   targetImage: 'bookapprepaso:15'
 
 steps:
-- #task: DockerInstaller@0
+#- task: DockerInstaller@0
   #inputs:
   #  dockerVersion: 'latest'
 
