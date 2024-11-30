@@ -8,13 +8,13 @@ variables:
   sourceRegistry: '/subscriptions/89f21b48-2a5e-477c-ac88-c9cbb8401024/resourceGroups/rg_repasowebapp03/providers/Microsoft.ContainerRegistry/registries/repasowebappacr'
   sourceImage: 'container-apps-dotnet-eventing/eventhub:2376'
   targetRegistry: 'fisica3'
-  targetImage: 'eventhub_new2:45'
+  targetImage: 'eventhub_new2:56'
 
 
 steps:
-- task: DockerInstaller@0
-  inputs:
-    dockerVersion: '17.09.0-ce'
+#- task: DockerInstaller@0
+#  inputs:
+#    dockerVersion: '17.09.0-ce'
 
 - task: AzureCLI@2
   inputs:
@@ -27,9 +27,3 @@ steps:
       az acr login -n $(targetRegistry) --expose-token
       az account show
       az acr import --name $(targetRegistry) --source $(sourceImage) --image $(targetImage) --registry $(sourceRegistry)
-    #addSpnToEnvironment: true
-    #az acr import --name MyRegistry --source docker.io/library/hello-world:latest --image targetrepository:targettag
-          # az login --identity
-#az acr import --name MyRegistry --source sourcerepository:sourcetag --image targetrepository:targettag 
-#--registry /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sourceResourceGroup/providers/Microsoft.ContainerRegistry/registries/sourceRegistry
-#Import an image from an Azure container registry in a different subscription.
