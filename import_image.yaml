@@ -8,7 +8,9 @@ variables:
   sourceRegistry: '/subscriptions/89f21b48-2a5e-477c-ac88-c9cbb8401024/resourceGroups/rg_repasowebapp03/providers/Microsoft.ContainerRegistry/registries/repasowebappacr'
   sourceImage: 'container-apps-dotnet-eventing/eventhub:2376'
   targetRegistry: 'fisica3'
-  targetImage: 'eventhub_new2:56'
+  targetImage: 'eventhub_new2:444'
+  targetSubscription: 'Visual Studio Enterprise Subscription'
+  scTargetSubscription: 'sc_arm_ErnestoContainers'
 
 
 steps:
@@ -18,12 +20,12 @@ steps:
 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'sc_arm_ErnestoContainers'
+    azureSubscription: $(scTargetSubscription)
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
       az upgrade --yes
-      az account set --subscription "Visual Studio Enterprise Subscription"
+      az account set --subscription $(targetSubscription)
       az acr login -n $(targetRegistry) --expose-token
       az account show
       az acr import --name $(targetRegistry) --source $(sourceImage) --image $(targetImage) --registry $(sourceRegistry)
